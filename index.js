@@ -1,6 +1,6 @@
 var films = JSON.parse(localStorage.getItem("films"));
 function cadastrar() {
-  var film = {};
+  let film = {};
     film.title = document.getElementById("title").value;
     film.rating = document.getElementById("rating").value;
     film.length = document.getElementById("length").value;
