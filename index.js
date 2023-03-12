@@ -1,6 +1,20 @@
-var films = JSON.parse(localStorage.getItem("films"));
-function cadastrar() {
-  let film = {};
+var films = JSON.parse(localStorage.getItem("films"))||[];
+
+class Film{
+  title
+  rating
+  length
+  constructor(){
+    this.title = title;
+    this.rating = rating;
+    this.length = length;
+  }
+  
+  
+};
+
+function add(){
+  let film = new Film;
     film.title = document.getElementById("title").value;
     film.rating = document.getElementById("rating").value;
     film.length = document.getElementById("length").value;
@@ -9,9 +23,7 @@ function cadastrar() {
     film.wathced = false;
   
   let titles = [];
-  films.forEach(function(existingFilm) {
-    titles.push(existingFilm.title);
-  });
+  films.forEach((existingFilm)=> {titles.push(existingFilm.title)});
   if (titles.includes(film.title)) {
     alert(`Já possui um filme com esse mesmo título`);
     return;
@@ -22,4 +34,6 @@ function cadastrar() {
   localStorage.setItem("films", JSON.stringify(films));
   
   document.getElementById("films-form").reset(); 
-}
+  }
+
+ 
