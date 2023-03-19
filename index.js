@@ -1,4 +1,5 @@
-var films = JSON.parse(localStorage.getItem("films"))||[];
+let films = JSON.parse(localStorage.getItem("films"))||[];
+let favourites = [];
 
 class Film{
   title
@@ -35,68 +36,80 @@ function add(){
   
   document.getElementById("films-form").reset(); 
   }
+function clearStorage(){
+  localStorage.clear();
+  location.reload();
+  films= [];
+}
 
 function listFilms (){
  films.forEach(createCard);
   };
-
-  let card;
-async function createCard(film){
-card = document.createElement("div");
-card.classList = "filmCard";
-let title = document.createElement("h1");
-title.innerHTML=film.title;
-title.id="filmTitle";
-let rating = document.createElement("img");
-  if(film.rating==5){
-    rating.src= "img/5-stars.jpg";
-  }
-  else if (film.rating==4){
-    rating.src="img/4-stars.jpg";
-  }
-  else if (film.rating==3){
-    rating.src="img/3-stars.jpg";
-  }
-   else if (film.rating==2){
-    rating.src="img/2-stars.jpg";
-  }
-  else if (film.rating==1){
-    rating.src="img/1-star.jpg";
-  }
-await getPoster(title.innerHTML);
-// poster.src = url;
-card.appendChild(title);
-card.appendChild(rating);
-document.getElementById("filmsList").appendChild(card);
-return card;
+function setFavourite(film){
+  film.favourite=true;
+  
 }
+   
+  async function createCard(film){
+    const filmCard = document.createElement("div");
+      filmCard.id = film.title;
+      filmCard.classList="filmCard";
+     
+    let poster = await fetch("https://api.themoviedb.org/3/search/movie?api_key=15d2ea6d0dc1d476efbca3eba2b9bbfb&query="+film.title)
+    .then((response) => {
+      r = response; 
+      r = r.json();
+      return r;
+    } ).then((data) => {
+      resultsArray= data.results;
+      results= resultsArray[0];
+      path= results.poster_path;
+      let poster = document.createElement("img");
+      poster.id="filmPoster";
+      poster.src= "http://image.tmdb.org/t/p/w500/"+ path;
+      return poster;
+    }).catch(()=>{alert(`poster nao achado para filme ${film.title}`);
+    films.pop()});
+    
+    
+    let favourite= document.createElement('img');
+    favourite.src = "img/heart-empty.png";
+    favourite.id ="favourite";
+    favourite.addEventListener('click',function(){
+      setFavourite(film);
+    })
+    let breakLine = document.createElement("br");
+    let title = document.createElement("span");
+    title.innerHTML=film.title;
+    title.id="filmTitle";
+    let length = document.createElement("span");
+    length.innerHTML = film.length + "mins";
+    let rating = document.createElement("img");
+    rating.id = "ratingimg";
+    switch(film.rating){
+      case "5":
+        rating.src= "./img/5-stars.jpg";
+        break;
+      case "4": 
+        rating.src="./img/4-stars.jpg";
+        break;
+      case "3":
+        rating.src="./img/3-stars.jpg";
+        break;
+      case "2":
+        rating.src="./img/2-stars.jpg";
+        break;
+      case "1":
+        rating.src="./img/1-star.jpg";
+        break;
+  }
 
 
-
-async function getPoster(title){
-  console.log(title);
-  await fetch("https://api.themoviedb.org/3/search/movie?api_key=15d2ea6d0dc1d476efbca3eba2b9bbfb&query="+title)
-  .then((response) => {
-    r = response; 
-    console.log( 1, r);
-    r = r.json();
-    console.log(2, r);
-    return r;
-  } )
-  .then((data) => {
-    console.log( 3, data);
-    r= data.results;
-    console.log(4, r);
-    r = r[0];
-    console.log(5,r);
-    r= r.poster_path;
-    console.log(6,r);
-    let poster = document.createElement("img");
-    poster.id="poster";
-    poster.src= "http://image.tmdb.org/t/p/w500/"+ r;
-    obj = card.appendChild(poster);
-    console.log(obj);
-   })
-
+filmCard.appendChild(title);
+filmCard.appendChild(favourite); 
+filmCard.appendChild(length);
+filmCard.appendChild(poster);
+filmCard.appendChild(rating);
+filmsList.appendChild(filmCard);
 
 }
