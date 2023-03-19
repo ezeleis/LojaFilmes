@@ -1,6 +1,7 @@
 let films = JSON.parse(localStorage.getItem("films"))||[];
 let favourites = [];
-
+let titles = [];
+films.forEach((existingFilm)=> {titles.push(existingFilm.title)})
 class Film{
   title
   rating
@@ -23,18 +24,16 @@ function add(){
     film.favourite = false;
     film.wathced = false;
   
-  let titles = [];
-  films.forEach((existingFilm)=> {titles.push(existingFilm.title)});
+  ;
   if (titles.includes(film.title)) {
     alert(`Já possui um filme com esse mesmo título`);
     return;
+  }else {
+    films.push(film);
+    alert(`filme ${film.title} adicionado com suceso!`);
+    localStorage.setItem("films", JSON.stringify(films));
+    document.getElementById("films-form").reset(); 
   }
-
-  films.push(film);
-  alert(`filme ${film.title} adicionado com suceso!`);
-  localStorage.setItem("films", JSON.stringify(films));
-  
-  document.getElementById("films-form").reset(); 
   }
 function clearStorage(){
   localStorage.clear();
@@ -42,9 +41,9 @@ function clearStorage(){
   films= [];
 }
 
-function listFilms (){
- films.forEach(createCard);
-  };
+// function listFilms (){
+//  films.forEach(createCard);
+//   };
 function setFavourite(film){
   film.favourite=true;
   
@@ -112,4 +111,11 @@ filmCard.appendChild(poster);
 filmCard.appendChild(rating);
 filmsList.appendChild(filmCard);
 
+}
+
+//funcao de busqueda Ex 4
+function search(){
+  let filmTitle= document.getElementById('search-title').value;
+  let filmObj = films.find((film)=>film.title == filmTitle);
+  filmObj?createCard(filmObj):alert("filme nao encontrado");
 }

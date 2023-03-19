@@ -8,7 +8,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
     <script src="jquery-3.6.4.js"></script>
   </head>
-  <body onload="listFilms()">
+  <body >
     <h1>Loja de Filmes</h1>
     <div id="filmForm">
   
@@ -30,7 +30,12 @@
 
       <input type="submit" value="Cadastrar">
      
-      </form>
+      </form><br>
+
+      
+        <label for="search-title">Buscar filme</label>
+        <input type="text" id="search-title" name="search-title">
+        <button onclick=search()>Buscar</button>
       <button onclick=clearStorage()>Limpar tela</button>
       
     </div>
