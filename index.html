@@ -12,7 +12,7 @@
     <h1>Loja de Filmes</h1>
     <div id="filmForm">
   
-      <form onsubmit="add()" id="films-form">
+      <form onsubmit="cadastrar()" id="films-form">
       <label for="title">Título:</label>
       <input type="text" id="title" name="title">
 
@@ -34,6 +34,8 @@
       <button onclick=clearStorage()>Limpar tela</button>
       
     </div>
+    <input type="text" id="buscar" name="buscar">
+    <button onclick="buscar()">Buscar</button>
     <div id = "filmsList"></div>
     <script src="index.js"></script>
   </body>
