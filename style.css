@@ -41,7 +41,7 @@ body{
     margin-top:25px;
 }
 #filmTitle{
-    font-size: 32px;
+    font-size:;
     box-sizing: border-box;
     
 }
@@ -63,6 +63,6 @@ body{
         
   }
   #favourite{
-    max-width:auto;
-    max-height:30px;
+    max-width:50px;
+    max-height:50px;
   }

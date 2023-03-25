@@ -34,8 +34,8 @@
       <button onclick=clearStorage()>Limpar tela</button>
       
     </div>
-    <input type="text" id="buscar" name="buscar">
-    <button onclick="buscar()">Buscar</button>
+    <input type="text" id="buscar" name="buscar" onkeyup="buscar()">
+    <button onclick="notFound()">Buscar</button>
     <div id = "filmsList"></div>
     <script src="index.js"></script>
   </body>

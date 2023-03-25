@@ -1,5 +1,9 @@
 let films = JSON.parse(localStorage.getItem("films"))||[];
+
 let favourites = [];
+
+let titles = [];
+films.forEach((film)=>titles.push(film.title));
 
 class Film{
   title
@@ -122,3 +126,14 @@ filmCard.appendChild(rating);
 filmsList.appendChild(filmCard);
 
 }
+
+
+ async function buscar(){
+  let termo= document.getElementById("buscar").value;
+  filmsList.innerHTML="";
+  let resultsObjects=films.filter((film)=>film.title.includes(termo));
+  console.log(resultsObjects);
+  resultsObjects.forEach((film)=>listar(film));
+  
+}
+
