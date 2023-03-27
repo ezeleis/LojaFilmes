@@ -1,6 +1,7 @@
 let films = JSON.parse(localStorage.getItem("films"))||[];
 
 let favourites = [];
+favourites = films.filter((film)=>film.favourite);
 
 let titles = [];
 films.forEach((film)=>titles.push(film.title));
@@ -25,10 +26,11 @@ function cadastrar(){
     film.length = document.getElementById("length").value;
     //Favorito e asistido (em ingles igual ao resto do meu codigo)
     film.favourite = false;
-    film.wathced = false;
+    film.watched = false;
   
   let titles = [];
   films.forEach((existingFilm)=> {titles.push(existingFilm.title)});
+  
   if (titles.includes(film.title)) {
     alert(`Já possui um filme com esse mesmo título`);
     return;
@@ -49,14 +51,6 @@ function clearStorage(){
 function listFilms (){
  films.forEach(listar);
   };
-function setFavourite(film){
-  switch (film.favourite){
-    case true:
-      film.favourite = false;
-    case false:
-      film.favourite = true;
-  }
-}
  //Ex 3  
 async function listar(film){
   const filmCard = document.createElement("div");
@@ -80,18 +74,17 @@ async function listar(film){
   films.pop()});
   
   let favourite= document.createElement('img');
-  favourite.src = "img/heart-empty.png";
-  favourite.id ="favourite";
-  favourite.addEventListener('click',()=>film.favourite?film.favourite=false:film.favourite=true);
-  favourite.addEventListener('click',()=>{
-    if(film.favourite){
-        favourite.src="img/heart-full.png"}
-    else{
-     favourite.src="img/heart-empty.png";
-  }}
-  );
+  favourite.src = film.favourite?"img/heart-full.png":"img/heart-empty.png";
+  favourite.id =`${film.title} favourite`;
+  favourite.addEventListener('click',()=>setFavourite(film));
 
-  let breakLine = document.createElement("br");
+  let watched= document.createElement('img');
+  watched.src = film.watched?"img/watched-yes.png":"img/watched-no.png";
+  watched.id =`${film.title} watched`;
+  watched.classList='watchedimg'
+  
+  watched.addEventListener('click',()=>setWatched(film));
+
   let title = document.createElement("span");
   title.innerHTML=film.title;
   title.id="filmTitle";
@@ -120,6 +113,7 @@ async function listar(film){
 
 filmCard.appendChild(title);
 filmCard.appendChild(favourite); 
+filmCard.appendChild(watched);
 filmCard.appendChild(length);
 filmCard.appendChild(poster);
 filmCard.appendChild(rating);
@@ -136,4 +130,27 @@ filmsList.appendChild(filmCard);
   resultsObjects.forEach((film)=>listar(film));
   
 }
+// function setFavourite(film) {
+//   film.favourite = !film.favourite;
+//   favourites = films.filter((film) => film.favourite);
+//   const favouriteIcon = document.getElementById(`${film.title} favourite`);
+//   favouriteIcon.src = film.favourite ? "img/heart-full.png" : "img/heart-empty.png";
+// }
+//Assistido e favoritos funcoes do ex 6
+function setWatched(film) {
+  film.watched = !film.watched;
+  favourites = films.filter((film) => film.watched);
+  const watchedIcon = document.getElementById(`${film.title} watched`);
+  watchedIcon.src = film.watched ? "img/watched-yes.png" : "img/watched-no.png";
+}
 
+function setFavourite(film){
+  if(!film.favourite && favourites.length == 3){
+    alert('Já existem três filmes favoritos');
+    return;
+  }
+  film.favourite = !film.favourite;
+  favourites = films.filter((film)=>film.favourite);
+  const favouriteIcon = document.getElementById(`${film.title} favourite`);
+  favouriteIcon.src = film.favourite ? "img/heart-full.png" : "img/heart-empty.png";
+}
