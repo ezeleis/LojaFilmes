@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>NetFilms</title>
+    <link rel="stylesheet" href="./assets/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
+
+  </head>
+  <body>
+    <h1>Loja de Filmes</h1>
+    <span id="watched-hours"></span>
+    <div id="filmForm">
+  
+      <form id="films-form">
+      <label for="title">Título:</label>
+      <input type="text" id="title" name="title">
+
+      <label for="rating">Rating:</label>
+      <select id="rating" name="rating">
+        <option value="1">1 estrela</option>
+        <option value="2">2 estrelas</option>
+        <option value="3">3 estrelas</option>
+        <option value="4">4 estrelas</option>
+        <option value="5">5 estrelas</option>
+      </select>
+
+      <label for="length">Duração (minutos):</label>
+      <input type="number" id="length" name="length">
+
+      <input type="submit" id="cadastrar"></button>
+     
+      </form>
+      <button id="clear">Limpar tela</button>
+      
+    </div>
+    <input type="text" id="buscar" name="buscar">
+    <button>Buscar</button>
+    <div id = "filmsList"></div>
+    <script type= "module" src="./js/main.mjs"></script>
+  </body>
+</html>
