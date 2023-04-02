@@ -59,8 +59,10 @@ export class Film {
     watched.addEventListener("click", () => setWatched(film));
     filmCard.appendChild(watched);
 
+    const length = document.createElement("span");
+    length.innerHTML = film.length?film.length + "mins":"";
+    filmCard.appendChild(length);
  
-
     try {
       const response = await fetch(`https://api.themoviedb.org/3/search/movie?api_key=15d2ea6d0dc1d476efbca3eba2b9bbfb&query=${film.title}`);
       const data = await response.json();
@@ -76,13 +78,7 @@ export class Film {
       alert(`Poster not found for ${film.title}`);
       return;
     }
-  
- 
-  
-    const length = document.createElement("span");
-    length.innerHTML = film.length + "mins";
-    filmCard.appendChild(length);
-  
+
     const rating = document.createElement("img");
     rating.id = "ratingimg";
     switch (film.rating) {

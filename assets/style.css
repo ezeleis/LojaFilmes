@@ -1,3 +1,6 @@
+body{
+    background-image:url("../img/EZ.png");
+}
 nav{
     display:flex;
     justify-content: space-around;
@@ -8,18 +11,26 @@ nav{
 
 body{
     font-family: 'Bebas Neue', cursive;
+    color:aliceblue;
+    text-shadow: 10px 10px 10px #000000;
     text-align: center;
-    mix-blend-mode: multiply;
+    
 }
 
 #filmForm{
+    border-radius:50%;
+    color:aliceblue;
+    background-image: linear-gradient(to bottom, #fb1818, #ccc);
+    background-size: cover;      
     display:flex;
     flex-wrap:nowrap;
-    width:900px;
+    width:720px;
     margin:auto;
     text-shadow: 10px 10px 10px #000000;
    
 }
+
+
 
 #filmsList{
     display:flex;
@@ -29,8 +40,12 @@ body{
 }
 
 .filmCard{
+    color:#000000;
+    text-shadow: 0px 0px 10px #ffffff;
     position:relative;
     display: flex;
+    justify-content: space-between;
+    flex-direction:column;
     box-sizing: border-box;
     flex-wrap:wrap;
     width: 300px;
@@ -38,12 +53,12 @@ body{
     background-image: linear-gradient(rgb(226, 99, 99),rgb(184, 243, 107));
     box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
     border-radius: 10%; 
-    justify-content: center;
-    align-items: center;
+    
     margin-top:25px;
 }
 #filmTitle{
-
+    position:relative;
+    z-index:1;
     font-size:24px;
     
 }
@@ -51,18 +66,18 @@ body{
     
     max-height:auto;
     box-sizing:border-box;
-    width:225px;
+    width:230px;
     margin-left:15px;
     margin-right:15px;
     display: block;
     margin: 0 auto;
-    position: relative;
-    top: 50%;
-    transform: translateY(-50%);
+    border-radius:10%;
+    
+    
   }
 
   #ratingimg{
-        box-shadow: 0 16px 32px 0 rgba(0,0,0,0.2);
+        box-shadow: 0 16px 32px 0 rgba(247, 244, 244, 0.2);
         border-radius: 5px 5px 0 0;
         width:300px;
         max-height:auto;
@@ -83,7 +98,7 @@ body{
     mix-blend-mode: multiply;
     position: absolute;
     top: 0;
-    right: 0;
+    right:20px;
 }
 
 .fav{
@@ -92,8 +107,9 @@ body{
     max-height:50px;
     position: absolute;
     top: 0;
-    left: 0;
+    left: 20px;
 }
 #watched-hours{
     display:inline-block;
 }
+
