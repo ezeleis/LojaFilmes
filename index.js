@@ -128,8 +128,9 @@ filmsList.appendChild(filmCard);
   let termo= document.getElementById("buscar").value;
   filmsList.innerHTML="";
   let resultsObjects=films.filter((film)=>film.title.includes(termo));
-  console.log(resultsObjects);
-  resultsObjects.forEach((film)=>listar(film));
+  const notFound=document.createElement("p");
+  notFound.innerHTML="Não foi encontrado nenhum filme com esse titulo";
+  resultsObjects!=""?resultsObjects.forEach((film)=>listar(film)):alert("Não foi encontrado nenhum filme com esse titulo");
   
 }
 
