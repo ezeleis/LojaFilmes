@@ -75,7 +75,7 @@ export class Film {
     poster.addEventListener('load', filmCard.appendChild(poster));
     } catch (error) {
       console.error(error);
-      alert(`Poster not found for ${film.title}`);
+      alert(`Poster não achado para o filme ${film.title}`);
       return;
     }
 
